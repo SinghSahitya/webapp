@@ -1,0 +1,370 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block headblock %}
+<style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+
+.item {
+  width: 200px;
+  height: 300px;
+  list-style-type: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 30px rgba(255,255,255,0.3) inset;
+  transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+
+  &:nth-child(1), &:nth-child(2) {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+  }
+
+  &:nth-child(3) { left: 50%; }
+  &:nth-child(4) { left: calc(50% + 220px); }
+  &:nth-child(5) { left: calc(50% + 440px); }
+  &:nth-child(6) { left: calc(50% + 660px); opacity: 0; }
+}
+
+.content {
+  width: min(40vw,600px);
+  position: absolute;
+  top: 50%;
+  left: 3rem;
+  transform: translateY(-50%);
+  font: 400 0.85rem helvetica,sans-serif;
+  color: white;
+  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.7); 
+  opacity: 0;
+  display: none;
+  padding: 20px; /* Add padding for better spacing */
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease; /* Add transition for smoother effect */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Add initial box shadow */
+
+  & .title {
+    font-family: 'arial-black';
+    text-transform: uppercase;
+    font-size: 40px;
+  }
+
+  & .description {
+    line-height: 1.7;
+    margin: 1rem 0 1.5rem;
+    font-size: 1rem;
+    color: #ffffff;
+  }
+
+  & button {
+    width: fit-content;
+    background-color: rgba(0,0,0,0.1);
+    color: white;
+    border: 2px solid white;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    cursor: pointer;
+  }
+}
+
+
+.content:hover {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7); /* Change box shadow on hover */
+    }
+
+.item:nth-of-type(2) .content {
+  display: block;
+  animation: show 0.75s ease-in-out 0.3s forwards;
+}
+
+@keyframes show {
+  0% {
+    filter: blur(5px);
+    transform: translateY(calc(-50% + 75px));
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.nav {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  user-select: none;
+
+  & .btn {
+    background-color: rgba(255,255,255,0.5);
+    color: rgba(0,0,0,0.7);
+    border: 2px solid rgba(0,0,0,0.6);
+    margin: 0 0.25rem;
+    padding: 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(255,255,255,0.3);
+    }
+  }
+}
+
+@media (width > 650px) and (width < 900px) {
+  .content {
+    & .title        { font-size: 1rem; }
+    & .description  { font-size: 0.7rem; }
+    & button        { font-size: 0.7rem; }
+  }
+  .item {
+    width: 160px;
+    height: 270px;
+
+    &:nth-child(3) { left: 50%; }
+    &:nth-child(4) { left: calc(50% + 170px); }
+    &:nth-child(5) { left: calc(50% + 340px); }
+    &:nth-child(7) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(8) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(9) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(10) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(11) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(12) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(13) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(14) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(15) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(16) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(17) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(18) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(19) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(20) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(21) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(22) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(23) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(24) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(25) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(26) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(27) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(28) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(29) { left: calc(50% + 510px); opacity: 0; }
+    &:nth-child(30) { left: calc(50% + 510px); opacity: 0; }
+  }
+}
+
+@media (width < 650px) {
+  .content {
+    & .title        { font-size: 0.9rem; }
+    & .description  { font-size: 0.65rem; }
+    & button        { font-size: 0.7rem; }
+  }
+  .item {
+    width: 130px;
+    height: 220px;
+
+    &:nth-child(3) { left: 50%; }
+    &:nth-child(4) { left: calc(50% + 140px); }
+    &:nth-child(5) { left: calc(50% + 280px); }
+    &:nth-child(6) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(7) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(8) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(9) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(10) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(11) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(12) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(13) { left: calc(50% + 420px); opacity: 0; }
+    &:nth-child(14) { left: calc(50% + 420px); opacity: 0; }
+  }
+}
+
+    </style>
+{% endblock %}
+
+{% block bodyblock %}
+    <main>
+        <ul class='slider'>
+          <li class='item' style="background-image: url('{% static 'images/t1.jpg' %}')" >
+            <div class='content'>
+              <h2 class='title'>August 31,  2022</h2>
+              <p class='description'>"Samriddhi Mishra right?" It was not just a question, I knew who you were the moment I received a friend request from a private account with a strange username and 'samriddhi' in the bio. The question was something else, you know right after getting that request I thought very hard about how should I say hii and what would I say after you reply and after mustering up all the courage I asked 'Samriddhi Mishra right?'. What I meant was are you that girl I knew years ago? Are you that girl that got me coming to school regularly just to see you?Are you that girl for whom I would come up with excuses just to have a conversation? Are you that girl  I used to tell my whole family about? Are you that girl who gave me her number on a piece of paper? Are you that girl who drew her address in the last page of my notebook?Are you that girl who got an 8 year old thinking about forever? And most importantly - Are you that girl I am still in love with?. So my real question was  - "My Samriddhi Mishra, right?" to which you replied 'Yes:)' 🫶</p>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t2.jpg' %}')">
+            <div class='content'>
+              <h2 class='title'>September 7, 2022</h2>
+              <p class='description'>Took us 7 days, Just 7 days, to confess our feelings. Just 7 days of talking after years of silence to say 'I like you not in friendly wala way'. I literaly jumped with excitement and happiness when I read that. I knew you felt something too, all those playlist, all those poems, that 'I used to stalk you' all that meant something but it was still so unexpected because I had been waiting for that day since 8 years so for me it was nothing less than a dream come true. I didnt sleep that night, how could I? (Well one reason was because I actually feared the possibility of this being a dream) All I could do was keep reading and rereading our chats. I was smiling so much that I had to physically stop myself and keep away my phone. Its still one of the most exicitng nights of my life because god knows how bad I waited for the next day to talk to you.</p>
+              
+            </div>
+          </li>
+          
+          <li class='item' style="background-image: url('{% static 'images/t3.jpg' %}')">
+            <div class='content'>
+              <h2 class='title'>February 27, 2023</h2>
+              <p class='description'>The day that we first met.... The nervousness, the adrenaline rush, the excitement I had never felt anything like that and I still get butterflies when I think about it. So much happened this day, I saw you properly for the first time in ages, I held your hand as if they belonged to me, I was not able to get my eyes off you because you looked so unfathomably beautiful, and your eyes, they hooked me so bad I don't even know what we talked about because I just got so lost. We kissed. Did we?? Did that really happen??? That one moment got me smiling like a maniac for days to come and I still melt whenever I think about it. Those cute lil moments when I was saying please come closer and U were playfully refusing and then u did come close and I leaned in and u closed ur eyes and then it just happened, we kissed, like it was the most natural thing to do. At that moment, my mind practically shut down and all I could feel was your lips and all I could think was I wanna kiss you forever. You remember that moment when you said "Main boht sakht hun" and then I leaned in and you melted right away. These are such precious memories that I want to cherish forever. You changed my life after that day. You don't need all those manifestations to make me obsessed with you baby, Just stand in front of me and it would do the trick 😉
+              </p>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t4.png' %}')">
+            <div class='content'>
+              <h2 class='title'>March 9, 2023</h2>
+              <p class='description'>Before this day, I had complimented you thousands of times about how beautiful you are but my love this day, when I saw you standing in front of your house wearing a white kurti,a bindi and kajal,I,in all my senses, transcended. I remember stopping in front of you and just staring at you, not even able to say how gorgeous you looked, and after you sat behind me I actually uttered something. I gave you a ring, right when you were saying 'it better not be a ring or smth'. I promised to be with you whatever happens, I promised I would stand with you through all ups and downs and I think its going pretty well. We celebrated our six months on this day, Six months, at that time it felt like so much but now, its just one third of the journey we have covered. Btw I hope you remember the theater ;) </p>
+              
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t5.png' %}')">
+            <div class='content'>
+              <h2 class='title'>March 17, 2023</h2>
+              <p class='description'>
+               
+              </p>
+              
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t6.png' %}')">
+            <div class='content'>
+              <h2 class='title'>July 18, 2023</h2>
+              <p class='description'> Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+              praesentium nisi. Id laboriosam ipsam enim.  </p>
+              
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t7.png' %}')">
+            <div class='content'>
+              <h2 class='title'>July 24, 2023</h2>
+              <p class='description'>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.
+              </p>
+              >
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t8.png' %}')">
+            <div class='content'>
+              <h2 class='title'>September 9, 2023</h2>
+              <p class='description'> Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+              praesentium nisi. Id laboriosam ipsam enim.  </p>
+             
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t9.png' %}')">
+            <div class='content'>
+              <h2 class='title'>October 1, 2023</h2>
+              <p class='description'> Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+              praesentium nisi. Id laboriosam ipsam enim.  </p>
+            
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t10.png' %}')">
+            <div class='content'>
+              <h2 class='title'>October 20, 2023</h2>
+              <p class='description'> Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+              praesentium nisi. Id laboriosam ipsam enim.  </p>
+              
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t11.png' %}')">
+            <div class='content'>
+              <h2 class='title'>November, 2023</h2>
+              <p class='description'> Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+              praesentium nisi. Id laboriosam ipsam enim.  </p>
+              
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t12.png' %}')">
+            <div class='content'>
+              <h2 class='title'>New Year 2024</h2>
+              <p class='description'>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore fuga voluptatum, iure corporis inventore praesentium nisi. Id laboriosam ipsam enim.
+              </p>
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t13.png' %}')">
+            <div class='content'>
+              <h2 class='title'>January 20, 2024</h2>
+              <p class='description'> Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+              praesentium nisi. Id laboriosam ipsam enim.  </p>
+            
+            </div>
+          </li>
+          <li class='item' style="background-image: url('{% static 'images/t14.png' %}')">
+            <div class='content'>
+              <h2 class='title'>February 16, 2024</h2>
+              <p class='description'> Lorem ipsum, dolor sit amet consectetur
+              adipisicing elit. Tempore fuga voluptatum, iure corporis inventore
+              praesentium nisi. Id laboriosam ipsam enim.  </p>
+              
+            </div>
+          </li>
+          
+          
+          
+        </ul>
+        <nav class='nav'>
+          <ion-icon class='btn prev' name="arrow-back-outline"></ion-icon>
+          <ion-icon class='btn next' name="arrow-forward-outline"></ion-icon>
+          
+        </nav>
+      </main>
+      
+      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+      <script>
+
+        const slider = document.querySelector('.slider');
+        
+        function activate(e) {
+          const items = document.querySelectorAll('.item');
+          e.target.matches('.next') && slider.append(items[0])
+          e.target.matches('.prev') && slider.prepend(items[items.length-1]);
+        }
+        
+        document.addEventListener('click',activate,false);
+        </script>
+        <script>
+          // Function to toggle the visibility of the full description
+          function toggleDescription(event) {
+              const content = event.target.parentNode;
+              const description = content.querySelector('.description');
+              const button = event.target;
+      
+              if (description.style.display === 'none' || description.style.display === '') {
+                  description.style.display = 'block';
+                  button.textContent = 'Read Less';
+              } else {
+                  description.style.display = 'none';
+                  button.textContent = 'Read More';
+              }
+          }
+      
+          // Add event listeners to all "Read More" buttons
+          const buttons = document.querySelectorAll('.content button');
+          buttons.forEach(button => {
+              button.addEventListener('click', toggleDescription);
+          });
+      </script>
+{%endblock%}

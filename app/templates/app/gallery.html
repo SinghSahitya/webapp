@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Gallery</title>
+    <style>
+   body {
+  background-color: rgb(10, 10, 10);
+  margin: 0px;
+  overflow: hidden;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20vh;
+  padding: clamp(1rem, 5vw, 6rem);
+}
+
+nav > a {
+  color: rgba(255, 255, 255, 0.25);
+  font-family: "Open Sans", sans-serif;
+  font-size: clamp(3rem, 8vw, 10rem);
+  font-weight: 300;
+  text-decoration: none;
+  position: relative;
+}
+
+nav > a:hover {
+  color: white;
+}
+
+nav > a > span {
+  display: block;
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  position: relative;
+  z-index: 2;
+}
+
+nav > a:hover > span {  
+  border-top-color: white;
+  border-bottom-color: white;
+}
+
+nav > a > img {
+  position: absolute;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+  transition: transform 250ms, opacity 250ms;
+  pointer-events: none;
+  width: min(40vw, 500px);
+}
+
+nav > a:hover > img {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* -- YouTube Link Styles -- */
+
+body.menu-toggled > .meta-link > span {
+  color: rgb(30, 30, 30);
+}
+
+#source-link {
+  bottom: 60px;
+}
+
+#source-link > i {
+  color: rgb(94, 106, 210);
+}
+
+#yt-link > i {
+  color: rgb(239, 83, 80);
+}
+
+.meta-link {
+  align-items: center;
+  backdrop-filter: blur(3px);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  bottom: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;  
+  display: inline-flex;
+  gap: 5px;
+  left: 10px;
+  padding: 10px 20px;
+  position: fixed;
+  text-decoration: none;
+  transition: background-color 400ms, border-color 400ms;
+  z-index: 10000;
+}
+
+.meta-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.meta-link > i, .meta-link > span {
+  height: 20px;
+  line-height: 20px;
+}
+
+.meta-link > span {
+  color: white;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+}
+    </style>
+    
+</head>
+<body><nav id="nav">
+  <a href="#">
+    <span>Your</span>
+    <img src="{% static 'images/Gallery/n1.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>radiance</span>
+    <img src="{% static 'images/Gallery/n2.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>illuminates</span>
+    <img src="{% static 'images/Gallery/n3.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>the world</span>
+    <img src="{% static 'images/Gallery/n4.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>around you</span>
+    <img src="{% static 'images/Gallery/n5.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>turning</span>
+    <img src="{% static 'images/Gallery/n6.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>every</span>
+    <img src="{% static 'images/Gallery/n7.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>moment</span>
+    <img src="{% static 'images/Gallery/n8.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>worthy</span>
+    <img src="{% static 'images/Gallery/n9.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>into a</span>
+    <img src="{% static 'images/Gallery/n10.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>masterpiece</span>
+    <img src="{% static 'images/Gallery/n11.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>worhty</span>
+    <img src="{% static 'images/Gallery/n12.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>of</span>
+    <img src="{% static 'images/Gallery/n13.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>admiration</span>
+    <img src="{% static 'images/Gallery/n14.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>and</span>
+    <img src="{% static 'images/Gallery/n15.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>in a</span>
+    <img src="{% static 'images/Gallery/n16.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>gallery</span>
+    <img src="{% static 'images/Gallery/n17.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>of stars</span>
+    <img src="{% static 'images/Gallery/n18.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>you</span>
+    <img src="{% static 'images/Gallery/n19.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>outshines</span>
+    <img src="{% static 'images/Gallery/n20.jpg' %}" />
+  </a>
+  <a href="#">
+    <span>them all.</span>
+    <img src="{% static 'images/Gallery/n21.jpg' %}" />
+  </a>
+</nav>
+
+
+
+<a id="yt-link" class="meta-link" href="{% url 'home' %}" target="_blank">
+  <span>Back</span>
+</a>
+<script>
+  const nav = document.getElementById("nav");
+
+for(const link of nav.getElementsByTagName("a")) {  
+  link.onmousemove = e => {
+    const rect = link.getBoundingClientRect(),    
+          img = link.querySelector("img");
+    
+    img.style.left = `${e.clientX - rect.left}px`;
+    img.style.top = `${e.clientY - rect.top}px`;
+  }
+}
+
+window.onmousemove = e => {
+  const percent = e.clientY / window.innerHeight;
+  
+  nav.animate({
+    transform: `translateY(${percent * nav.offsetHeight * -1}px)`
+  }, {
+    fill: "forwards",
+    duration: 4000
+  })
+}
+</script>
+
+</body>
+</html>
+

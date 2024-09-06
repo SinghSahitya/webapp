@@ -1,0 +1,552 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block headblock %}
+  <!-- Add Bootstrap 5 CSS CDN link here -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Add additional custom styles here -->
+  <style>
+    /* Customize card border styles to match the theme */
+
+    .content {
+      background: linear-gradient(to bottom, #86b7e7 0%,  #bea2e7 100%)
+	
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+    .custom-jumbotron {
+      color: #fff;
+      padding: 1.5rem;
+      margin-bottom: 0; /* Reduce the bottom margin */
+      border-radius: 0; /* Remove border radius */
+      display: flex; /* Use flexbox for aligning the image */
+      flex-direction: column; /* Set the flex direction to column */
+      justify-content: center; /* Center vertically */
+      align-items: center; /* Center horizontally */
+      text-align: center; /* Center the text */
+    }
+  
+    .jumbotron-image {
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .wrapper {
+  height: 100vh;
+  /*This part is important for centering*/
+  display: grid;
+  place-items: center;
+}
+
+
+.gallery {
+  --size: 100px;
+  display: grid;
+  grid-template-columns: repeat(6, var(--size));
+  grid-auto-rows: var(--size);
+  margin-bottom: var(--size);
+  place-items: start center;
+  gap: 5px;
+  
+  &:has(:hover) img:not(:hover),
+  &:has(:focus) img:not(:focus){
+    filter: brightness(0.5) contrast(0.5);
+  }
+
+  & img {
+    object-fit: cover;
+    width: calc(var(--size) * 2);
+    height: calc(var(--size) * 2);
+    clip-path: path("M90,10 C100,0 100,0 110,10 190,90 190,90 190,90 200,100 200,100 190,110 190,110 110,190 110,190 100,200 100,200 90,190 90,190 10,110 10,110 0,100 0,100 10,90Z");
+    transition: clip-path 0.25s, filter 0.75s;
+    grid-column: auto / span 2;
+    border-radius: 5px;
+
+    &:nth-child(5n - 1) { 
+      grid-column: 2 / span 2 
+    }
+
+    &:hover,
+    &:focus {
+      clip-path: path("M0,0 C0,0 200,0 200,0 200,0 200,100 200,100 200,100 200,200 200,200 200,200 100,200 100,200 100,200 100,200 0,200 0,200 0,100 0,100 0,100 0,100 0,100Z");
+      z-index: 1;
+      transition: clip-path 0.25s, filter 0.25s;
+    }
+    
+    &:focus {
+      outline: 1px dashed black;
+      outline-offset: -5px;
+    }
+  }
+}
+
+
+.btn-primary {
+  background-color: #b13eb5; /* Set the button background color */
+  border-color: #b13eb5; /* Set the button border color */
+  color: #fff; /* Set the button text color */
+  text-decoration: none; /* Remove underline */
+}
+
+.btn-primary:hover {
+  background-color: #5959c3; /* Change background color on hover */
+  border-color: #5959c3; /* Change border color on hover */
+}
+
+.btn-primary:focus,
+.btn-primary:active {
+  box-shadow: none; /* Remove box shadow on focus and active state */
+  outline: none; /* Remove outline on focus */
+}
+
+h1 {
+  font-size: 3em; /* Increase the font size */
+  font-weight: bold; /* Add font weight */
+}
+
+p.lead {
+  font-size: 1.1em; /* Increase the font size */
+  font-weight: 500;
+  margin-bottom: 5px; 
+  /* Add some bottom margin */
+}
+
+hr.my-4 {
+  border-color: #fff; /* Set the hr color to white */
+}
+
+.text-center {
+  text-align: center !important; /* Force text alignment to center */
+}
+
+.wrapper {
+  height: 100vh;
+  /*This part is important for centering*/
+  display: grid;
+  place-items: center;
+}
+
+
+h1.timer {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+
+.countdown{
+  --number-color: hsl(0, 3%, 6%);
+  --text-color: hsl(0 0% 25%);
+  --dot-color: hsl(0 0% 10%);
+  --dot-color-remaining: hsl(182, 100%, 66%);
+  --dot-color-active: hsl(0 100% 50%);
+  font-family: system-ui, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: min(60rem, 100%);
+  margin-inline: auto;
+  container: inline-size;
+  > .part {
+    aspect-ratio: 1/1;
+    display: grid;
+    place-items: center;
+    > .remaining {
+      grid-area: 1/1;
+      color: hsl(0 0% 100%);
+      display: grid;
+      text-align: center;
+      font-size: 4cqi;
+      >.number {
+        color: var(--number-color);
+      }
+      >.text {
+        color: var(--text-color);
+        text-transform: uppercase;
+        font-size: 0.5em;
+      }
+    }
+    > .dot-container {
+      grid-area: 1/1;
+      height: 100%;
+      width: 4%;
+      rotate: calc(360deg / var(--dots) * var(--dot-idx));
+      > .dot {
+        width: 100%;
+        aspect-ratio: 1/1;
+        background-color: var(--dot-color);
+        border-radius: 50%;
+        transition: background-color .25s;
+        &[data-active=true]{
+          background-color: var(--dot-color-remaining);
+          &[data-lastactive=true]{
+            background-color: var(--dot-color-active);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.scroller {
+    overflow: auto;
+    padding: 1rem;
+    scroll-timeline-name: --scroller;
+    scroll-timeline-axis: inline;
+}
+
+.slider_points,
+ul {
+    
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+    padding-left: 0;
+    counter-reset: list-item;
+    perspective: 9000px;
+    transform-style: preserve-3d;
+    perspective-origin: 50% 50%;
+
+    .slider_list {
+        flex: 1 1 240px;
+        min-width: 240px;
+        border: 1px solid currentColor;
+        padding: 1rem;
+        animation: auto ease-in-out intro forwards,
+            auto ease-in-out outro forwards;
+        animation-timeline: view(inline);
+        animation-range: entry, exit;
+        transform-origin: bottom center;
+    }
+
+    p,
+    h2 {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+
+    h2 {
+        color: #4b4747;
+        font-weight: normal;
+    }
+}
+
+.slider_list {
+    display: flex;
+    flex-direction: column;
+    color: #ccc;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        counter-increment: list-item;
+        content: counter(list-item) ".";
+        font-size: 5em;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 1rem;
+        line-height: 1;
+    }
+
+    &::after {
+        content: "";
+        background-image: var(--bg);
+        position: absolute;
+        inset: -20px;
+        background-size: cover;
+        transform: scale(1);
+        transition: transform 0.5s ease-out, opacity 0.4s linear;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    &:hover {
+        color: #fff;
+        &::after {
+            transform: scale(1.1) rotate(4deg);
+            opacity: 0.8;
+        }
+    }
+}
+/* Add styles for the title container */
+.title-container {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+  margin-bottom: 2rem; /* Adjust margin bottom for spacing */
+}
+
+/* Add styles for the timer and slider titles */
+.timer-title, .slider-title {
+  font-size: 2.5em; /* Adjust font size */
+  color: #000; /* Set text color to black */
+  margin-right: 1rem; /* Add spacing between title and content */
+  position: relative; /* Set position to relative */
+  transition: color 0.3s; /* Add transition for color change */
+  text-decoration: none; /* Remove default underline */
+  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+/* Add styles for the underline */
+.timer-title::after, .slider-title::after {
+  content: ''; /* Add empty content */
+  position: absolute; /* Position absolutely */
+  bottom: -3px; /* Adjust position of underline */
+  left: 0; /* Align at the left side */
+  width: 100%; /* Start with full width */
+  height: 2px; /* Adjust height of underline */
+  background-color: #000; /* Set color of underline to black */
+  transition: width 0.3s, background-color 0.3s; /* Add transition for width and color change */
+}
+
+/* Hover effect for the title */
+.timer-title:hover, .slider-title:hover {
+  color: #b13eb5; /* Change text color on hover */
+}
+
+/* Hover effect for the underline */
+.timer-title:hover::after, .slider-title:hover::after {
+  width: 0; /* Shrink the width of underline on hover */
+  background-color: #b13eb5; /* Change underline color on hover */
+}
+
+
+
+@keyframes intro {
+    from {
+        transform-origin: center left;
+        opacity: 0;
+        scale: 0;
+        
+    }
+    to {
+        transform-origin: center left;
+        opacity: 1;
+        scale: 1;
+        
+    }
+}
+
+@keyframes outro {
+    from {
+        transform-origin: center right;
+        opacity: 1;
+        scale: 1;
+        
+    }
+    to {
+        transform-origin: center right;
+        opacity: 0;
+        scale: 0;
+        
+    }
+}
+
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+
+
+  
+}
+
+
+</style>
+  
+  
+{% endblock %}
+
+{% block bodyblock %}
+  {% load static %} <!-- Load the static template tag library -->
+  <div class="content">
+    
+    <div class="custom-jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <p class="lead text-center">1.5 years...18 months...547 days..thats how long we have been together now. In numbers it may seem small,but both of us know that we have come a long way baby.It's a very special day as it marks an important milestone in our relationship, it proves that we can hold each other through all the ups and downs that life can throw at us, that we can survive anything as long as we are together. These past months we have faced many challenges and we have faught a lot but this day proves that all of that was so small compared to how much I love you and how much you love me.</p>
+            <p class="lead text-center">As I sit here wondering how I will complete my midsem syllabus, I can't help but marvel at the passage of time. It feels like just yesterday I was nervously holding your hand on our first date, yet here we are, 547 days later, stronger than ever. Cheers to us baby, cheers to our past, present and the future that awaits and I know its going to beautiful because I will have you by my side, forever and ever. (well if you are by my side then I would def be looking at you instead of looking ahead and it could prove fatal if we are crossing a road but eh whatever 'till death do us part' they say right?)</p>
+            <p class="lead text-center">So here's to you my love, your site, I made some modifications and I hope you will like it. Lastly, I would just say, I can try to express it in as many words as I can but it will never be enough because no such scale exists that can measure the love I have for you, but still, I love you (so fucking godamnn much!!!).
+              <strong>Happy Anniversary Babydoll</strong>❤️</p>
+            <hr class="my-4">
+            <p class="text-center">You might wanna check this out 😉</p>
+            <button class="btn btn-primary"><a href="{% url 'hbd' %}" style="text-decoration: none; color: #fff;">Magic</a></button>
+          </div>
+          <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <article class="gallery">
+              <img src="{%static 'images/Gallery/h15.jpg' %}" alt="woman singing on stage" />
+              <img src="{%static 'images/Gallery/h9.jpg' %}" alt="woman singing on stage" />
+              <img src="{%static 'images/Gallery/h13.jpg' %}" alt="woman singing on stage" />
+              <img src="{%static 'images/Gallery/h2.jpg' %}" alt="guitar player at concert" />
+              <img src="{%static 'images/Gallery/h7.jpg' %}" alt="duo singing" />
+              <img src="{%static 'images/Gallery/h3.jpg' %}" alt="crowd cheering" />
+              <img src="{%static 'images/Gallery/h1.jpg' %}" alt="singer performing" />
+              <img src="{%static 'images/Gallery/h4.jpg' %}" alt="singer fistbumping crowd" />
+              
+              <img src="{%static 'images/Gallery/h6.jpg' %}" alt="crowd looking at a lighted stage" />
+              <img src="{%static 'images/Gallery/h8.jpg' %}" alt="woman singing on stage" />
+              <img src="{%static 'images/Gallery/h10.jpg' %}" alt="woman singing on stage" />
+              <img src="{%static 'images/Gallery/h14.jpg' %}" alt="woman singing on stage" />
+              <img src="{%static 'images/Gallery/g25.jpg' %}" alt="woman singing on stage" />
+              
+              
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+
+    <div class="container">
+      <h1 class="timer-title">Timer</h1>
+      <p style="font-size: 1.5em; color: white;">Counting down time until we meet next because I, for the life of me cannot stay away from you.</p>
+      <div class="countdown" data-target-date="2025-01-01 00:00:00"></div>
+    </div>
+
+    <div class="container">
+      <h1 class="slider-title">Letters</h1>
+      <div class="scroller">
+        <ol class="slider_points">
+          <li class="slider_list" style="--bg: url(https://spaceholder.cc/i/600x800?4)">
+            <a href="{% static 'pdfs/From the Depths of My Heart.pdf' %}" download style="text-decoration: none;">
+              <h2>From the depths of my heart</h2>
+              <p style="text-decoration: none; color: white;">August 31st, 9.00 p.m. - this one moment in time changed the entire
+                course of my life. Looking back now, I feel like before this my life was
+                so monotonous, like it was lacking the essence of what life really is. It’s
+                incredibly hard for me to imagine a life without you now...</p>
+            </a></li>
+            <li class="slider_list" style="--bg: url(https://spaceholder.cc/i/600x800?1)">
+              <a href="{% static 'pdfs/For_you.pdf' %}" download style="text-decoration: none;">
+                <h2>For You</h2>
+                <p style="text-decoration: none; color: white;">Yesterday night I didn’t sleep much, I was lying on my bed thinking how I can show my love for you, what can I do to make you feel more loved and now that you
+                  asked me to write a leƩer, I will try to express my love through this. You know
+                  whenever I am alone at night, like aŌer 3 (because these days I don’t sleep before
+                  4.30) I just keep thinking about...</p>
+              </a></li>
+            
+            <li class="slider_list" style="--bg: url(https://spaceholder.cc/i/600x800?3)">
+              <a href="{% static 'pdfs/OneYear.pdf' %}" download style="text-decoration: none;">
+                <h2>One Year</h2>
+                <p style="text-decoration: none; color: white;">“Hii”, it all started with just this three-leƩer word and it changed the course of
+                  both our lives. When I sent that message, I knew for sure that my life won’t be
+                  the same, I knew that this small acƟon will change the track of my life
+                  completely. I was so sure because my feelings for you never leŌ, they were
+                  always there, reminding me of you in some random Wednesday....</p>
+              </a></li>
+            
+            <li class="slider_list" style="--bg: url(https://spaceholder.cc/i/600x800?5)">
+              <a href="{% static 'pdfs/Main_Agar_Kahoon.pdf' %}" download style="text-decoration: none;">
+                <h2>Main Agar Kahoon</h2>
+                <p style="text-decoration: none; color: white;">I am sorry it took so long and it's not that long because I kept geƫng lost in memories. I was
+                  siƫng with my eyes closed and listening to songs while thinking about how to frame sentences
+                  to show you how much you mean to me and suddenly na "Main Agar Kahoon" started playing in
+                  the background and honest to God </p>
+              </a></li>
+              <li class="slider_list" style="--bg: url(https://spaceholder.cc/i/600x800?2)">
+                <a href="{% static 'pdfs/My_Love.pdf' %}" download style="text-decoration: none;">
+                  <h2>My love</h2>
+                  <p style="text-decoration: none; color: white;">Its good that you asked me to write something because for the past few days I also
+                    wanted to write down what I was feeling but I never got around it so I think this is
+                    best Ɵme to do it. You said aŌer going to college you realized how much you love
+                    me, honestly speaking I truly realized just how much more I love you because of
+                    these few days that we are not talking</p>
+                </a></li>
+        </ol>
+    </div>
+    </div>
+  </div>
+    
+
+<script>
+  const countdownEls = document.querySelectorAll(".countdown")
+countdownEls.forEach(countdownEl => createCountdown(countdownEl))
+
+function createCountdown(countdownEl){
+  const target = new Date("2024-03-15T09:00:00");
+
+  const parts = {
+    days: {text: ["days","day"], dots: 30},
+    hours: {text: ["hours","hour"], dots: 24},
+    minutes: {text: ["minutes","minute"], dots: 60},
+    seconds: {text: ["seconds","second"], dots: 60},
+  }
+
+  Object.entries(parts).forEach(([key, value])=>{
+    const partEl = document.createElement("div");
+    partEl.classList.add("part", key);
+    partEl.style.setProperty("--dots", value.dots);
+    value.element = partEl;
+
+    const remainingEl = document.createElement("div");
+    remainingEl.classList.add("remaining");
+    remainingEl.innerHTML = `
+      <span class="number"></span>
+      <span class="text"></span>
+    `
+    partEl.append(remainingEl);
+    for(let i = 0; i < value.dots; i++){
+      const dotContainerEl = document.createElement("div");
+      dotContainerEl.style.setProperty("--dot-idx", i);
+      dotContainerEl.classList.add("dot-container")
+      const dotEl = document.createElement("div");
+      dotEl.classList.add("dot")
+      dotContainerEl.append(dotEl);
+      partEl.append(dotContainerEl);
+    }
+    countdownEl.append(partEl);
+  })
+  getRemainingTime(target, parts)
+}
+
+function getRemainingTime(target, parts, first=true){
+  const now = new Date()
+  if(first) console.log({target, now})
+  const remaining = {}
+  let seconds = Math.floor((target - (now))/1000);
+  let minutes = Math.floor(seconds/60);
+  let hours = Math.floor(minutes/60);
+  let days = Math.floor(hours/24);
+  hours = hours-(days*24);
+  minutes = minutes-(days*24*60)-(hours*60);
+  seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
+  Object.entries({days, hours, minutes, seconds}).forEach(([key, value])=>{
+    const remaining = parts[key].element.querySelector(".number");
+    const text = parts[key].element.querySelector(".text");
+    remaining.innerText = value;
+    text.innerText = parts[key].text[Number(value==1)]
+    const dots = parts[key].element.querySelectorAll(".dot")
+    dots.forEach((dot, idx)=>{
+      dot.dataset.active = idx <= value;
+      dot.dataset.lastactive = idx == value;
+    })
+  })
+  if(now <= target){
+    window.requestAnimationFrame(()=>{
+      getRemainingTime(target, parts, false)
+    });
+  }
+}
+</script>
+  
+
+
+
+{% endblock %}

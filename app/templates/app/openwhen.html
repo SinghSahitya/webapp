@@ -1,0 +1,241 @@
+{% extends 'app/base.html' %}
+
+{% block headblock %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<style>
+
+.material {
+  background: #f9f9f9;
+  min-height: 100vh;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  padding: 30px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cardnew {
+  margin: 10px;
+  position: relative;
+  height: 300px;
+  width: 230px;
+}
+
+  &:nth-child(2) {
+    filter: hue-rotate(300deg) brightness(1.3);
+  }
+  &:nth-child(3) {
+    filter: hue-rotate(200deg) brightness(1.5);
+  }
+  &:nth-child(4) {
+    filter: hue-rotate(60deg) brightness(3);
+  }
+  &:nth-child(5) {
+    filter: hue-rotate(150deg) brightness(3);
+  }
+  &:nth-child(6) {
+    filter: hue-rotate(2100deg) brightness(3);
+  }
+  &:nth-child(7) {
+    filter: hue-rotate(100deg) brightness(3);
+  }
+  &:nth-child(8) {
+    filter: hue-rotate(350deg) brightness(3);
+  }
+  &:nth-child(9) {
+    filter: hue-rotate(400deg) brightness(3);
+  }
+  &:nth-child(10) {
+    filter: hue-rotate(75deg) brightness(3);
+  }
+  .boxshadow {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: 1px solid red;
+    transform: scale(0.8);
+    box-shadow: rgba(255, 0, 0, 1) 0px 30px 70px 0px;
+    transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+
+  .main {
+    width: 230px;
+    height: 300px;
+    overflow: hidden;
+    background: linear-gradient(
+      0deg,
+      rgb(244 10 10) 0%, rgb(241 255 103) 60%, rgb(255 102 102) 100%);
+  
+    position: relative;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 40px,
+      100% calc(100% - 40px),
+      calc(100% - 40px) 100%,
+      40px 100%,
+      0 calc(100% - 40px)
+    );
+    box-shadow: rgba(247, 207, 212, 1) 0px 7px 29px 0px;
+    transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  
+    .top {
+      position: absolute;
+      top: 0px;
+      left: 0;
+      width: 0px;
+      height: 0px;
+      z-index: 2;
+      border-top-color: #f5f5f5;
+  border-left: 115px solid transparent;
+  border-right: 115px solid transparent;
+  transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    }
+  
+    .side {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      transform: translateX(-50%);
+      height: 101%;
+      background: #f7cfd4;
+      clip-path: polygon(0% 0%, 50% 0, 95% 45%, 100% 100%, 0% 100%);
+      transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86) 1s;
+    }
+  
+    .left {
+      left: 0;
+    }
+    .right {
+      right: 0;
+      transform: translateX(50%) scale(-1, 1);
+    }
+  
+    .title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 50px;
+      font-weight: bold;
+      font-size: 20px;
+      opacity: 0;
+      z-index: -1;
+      transition: all 0.2s ease-out 0s;
+      color: #000000;
+      white-space: nowrap; 
+    }
+  
+    .button-container {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+  
+      .button {
+        position: absolute;
+        transform: translateX(-50%);
+        padding: 5px 10px;
+        clip-path: polygon(0 0, 100% 0, 81% 100%, 21% 100%);
+        background: #ff7f9c;
+        border: none;
+        color: white;
+        display: grid;
+        place-content: center;
+        transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        .svg {
+          width: 15px;
+          transition: all 0.2s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        }
+  
+        &:nth-child(1) {
+          bottom: 300px;
+          transition-delay: 0.4s;
+        }
+        &:nth-child(2) {
+          bottom: 300px;
+          transition-delay: 0.6s;
+        }
+        &:nth-child(3) {
+          bottom: 300px;
+          transition-delay: 0.8s;
+        }
+  
+        &:hover {
+          .svg {
+            transform: scale(1.2);
+          }
+        }
+  
+        &:active {
+          .svg {
+            transform: scale(0.7);
+          }
+        }
+      }
+    }
+  }
+
+
+
+.cardnew {
+  &:hover {
+    .main {
+      transform: scale(1.1);
+      .top {
+        top: -50px;
+      }
+      .left {
+        left: -50px;
+        transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.1s;
+      }
+      .right {
+        right: -50px;
+        transition: all 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.1s;
+      }
+      .title {
+        opacity: 1;
+        transition: all 0.2s ease-out 1.3s;
+      }
+
+      .button-container {
+        .button {
+          &:nth-child(1) {
+            bottom: 80px;
+            transition-delay: 0.8s;
+          }
+        }
+      }
+    }
+  }
+}
+
+    </style>
+{% endblock %}    
+{% block bodyblock %}   
+<div class="material">
+    {% for letter in content %}
+    
+    <div class="cardnew">
+        <div class="boxshadow"></div>
+        <div class="main">
+            <div class="top"></div>
+            <div class="left side"></div>
+            <div class="right side"></div>
+            <div class="title">{{ letter.name }}</div>
+            <div class="button-container">
+                <button class="button">
+                    <a href="{% url 'letter' letter_id=letter.pk %}" style="color: black; text-decoration: none;">
+                      <span class="material-symbols-outlined">
+                        expand_circle_down
+                        </span>
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

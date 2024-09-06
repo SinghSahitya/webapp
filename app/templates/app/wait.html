@@ -1,0 +1,118 @@
+<!-- wait.html -->
+{% extends 'app/base.html' %}
+
+{% block bodyblock %}
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #fefefe, #fffffe);
+    font-family: 'Roboto', sans-serif;
+    color: #000000;
+  }
+
+  .wait {
+    text-align: center;
+  }
+
+  .wait h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+  }
+
+  .timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  .unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+  }
+
+  .unit span {
+    font-size: 5em;
+    font-weight: 700;
+    letter-spacing: -5px;
+  }
+
+  .unit .label {
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: -15px;
+  }
+</style>
+
+<div class="container">
+  <div class="wait">
+    <h1>Please Wait</h1>
+    <div class="timer">
+      <div class="unit">
+        <span id="hours">00</span>
+        <span class="label">hours</span>
+      </div>
+      <div class="unit">
+        <span id="minutes">00</span>
+        <span class="label">minutes</span>
+      </div>
+      <div class="unit">
+        <span id="seconds">00</span>
+        <span class="label">seconds</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get the remaining time from the server-side variable
+  const remainingTime = "{{ remaining_time }}";
+
+  // Parse the remaining time to extract hours, minutes, and seconds
+  const [hours, minutes, seconds] = remainingTime.split(':');
+
+  // Update the timer elements with the remaining time
+  document.getElementById('hours').textContent = hours;
+  document.getElementById('minutes').textContent = minutes;
+  document.getElementById('seconds').textContent = Math.floor(seconds);
+
+  // Function to update the timer every second
+  function updateTimer() {
+    let remainingSeconds = parseInt(document.getElementById('seconds').textContent);
+    let remainingMinutes = parseInt(document.getElementById('minutes').textContent);
+    let remainingHours = parseInt(document.getElementById('hours').textContent);
+
+    if (remainingSeconds > 0) {
+      remainingSeconds--;
+    } else {
+      remainingSeconds = 59;
+      if (remainingMinutes > 0) {
+        remainingMinutes--;
+      } else {
+        remainingMinutes = 59;
+        if (remainingHours > 0) {
+          remainingHours--;
+        } else {
+          // Timer has reached 00:00:00, redirect to the surprise page
+          window.location.href = '/surprise';
+          return;
+        }
+      }
+    }
+
+    // Update the timer elements with the new values
+    document.getElementById('hours').textContent = String(remainingHours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(remainingMinutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(remainingSeconds).padStart(2, '0');
+  }
+
+  // Call the updateTimer function every second
+  setInterval(updateTimer, 1000);
+</script>
+{% endblock %}
